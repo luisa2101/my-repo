@@ -10,22 +10,19 @@ citiesName = "ne_50m_populated_places"
 riversName = "ne_10m_rivers_lake_centerlines_scale_rank"
 tempfolder = r"C:\Users\Michele\OneDrive - Scientific Network South Tyrol\EMMA\Year 1\Advanced geomatics\tmp"
 
-#cleanup
 HMap.remove_layers_by_name(["OpenStreetMap", countriesName, citiesName, riversName, "rivers_italy"])
 
-#load openstreetmap tiles layer
 osm = HMap.get_osm_layer()
 HMap.add_layer(osm)
 
-# load layer: POINTS
 citiesLayer = HVectorLayer.open(gpkgPATH, citiesName)
 
 citiesLayer.subset_filter("SOV0NAME='Italy'")   ## filtering in a layer
 
-## STYLING:
-# for marker: shape, size, rotation 
-# for fill: rgb code  OR "COLOR" + transparency
-# for stroke: color + thickness
+# STYLING:
+# marker: (shape, size, rotation)
+# fill: rgb code or directly the "color" + transparency
+# stroke: (color, thickness)
 pointStyle = HMarker("square",3,45) + \
                 HFill("red") + HStroke("brown",0.5)
 
@@ -43,29 +40,27 @@ labelProperties = {
     "field": field,
     "xoffset": 0,
     "yoffset": -6
-}    # dictionary
+}
 
 pointStyle += HLabel(**labelProperties) + HHalo("white",1)
 
 
 citiesLayer.set_style(pointStyle)
 
-# other layer: POLYGONS
+# Polygon layer
 countriesLayer = HVectorLayer.open(gpkgPATH, countriesName)
 countriesLayer.subset_filter("NAME='Italy'")
-italyGEOM = countriesLayer.features()[0].geometry    #extract the 1st because i know is just 1 feature now
+italyGEOM = countriesLayer.features()[0].geometry
 
 polygonStyle = HFill("190,207,80,150") + HStroke("black",1)
 countriesLayer.set_style(polygonStyle)
 
-
-# other layer: LINES
+# New Layer
 riversLayer = HVectorLayer.open(gpkgPATH, riversName)
 riversLayerItaly = riversLayer.sub_layer(italyGEOM,"rivers_italy",['scalerank','name'])    # it creates a new layer: geom, namenewlayer, fieldstomaintain
 
-## thematic styling: list of lists
 ranges = [
-    [0,0], #the biggest
+    [0,0],
     [1,5],
     [6,7],
     [8,9],
@@ -91,7 +86,7 @@ riversLayerItaly.set_graduated_style('scalerank', ranges, styles, labelStyle)
 #     "color": "darkblue",
 #     "size": 14,
 #     "field": 'name',
-#     "along_line": True,      #to follow direction of the line
+#     "along_line": True,      
 #     "bold": True,
 #     "italic": True
 # }
@@ -105,8 +100,7 @@ HMap.add_layer(countriesLayer)
 HMap.add_layer(riversLayerItaly)
 HMap.add_layer(citiesLayer)
 
-
-# LAYOUT: A4
+#PDF LAYOUT
 # Change QGIS coordinates to EPSG:4326 to sjow map
 
 printer = HPrinter(iface)
@@ -115,7 +109,7 @@ mapProperties = {
     "y": 25,
     "width": 285,
     "height": 180,
-    "extent": [10,44,12,46],   # or bounding box: countriesLayer.bbox(),
+    "extent": [10,44,12,46],
     "frame":True
 }
 
@@ -134,7 +128,7 @@ legendProperties = {
     "y": 30,
     "width": 150,
     "height": 100,
-    "max_symbol_size": 3 # not mm
+    "max_symbol_size": 3
 }
 
 scalebarProperties = {
