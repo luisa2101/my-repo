@@ -25,7 +25,7 @@ def fromLonString(lonString):
 lon = 11.34999
 lat = 46.49809
 
-stationsPath = r"C:\Users\Michele\OneDrive - Scientific Network South Tyrol\EMMA\Year 1\Advanced geomatics\stations.txt"
+stationsPath = r"C:\Users\Michele\Desktop\my-repo\data\stations.txt"
 centrePoint = HPoint(lon, lat)
 
 with open (stationsPath, "r") as file:

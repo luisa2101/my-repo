@@ -1,7 +1,7 @@
 #Exercise02
 from pyqgis_scripting_ext.core import *
 
-stationsPath = r"C:\Users\Michele\OneDrive - Scientific Network South Tyrol\EMMA\Year 1\Advanced geomatics\stations.txt"
+stationsPath = r"C:\Users\Michele\Desktop\my-repo\data\stations.txt"
 with open (stationsPath, "r") as file:
     lines = file.readlines()
 

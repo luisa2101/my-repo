@@ -1,7 +1,7 @@
 # Exercise 00
 from pyqgis_scripting_ext.core import *
 
-geomPath = r"C:\Users\Michele\OneDrive - Scientific Network South Tyrol\EMMA\Year 1\Advanced geomatics\02_exe0_geometries.csv"
+geomPath = r"C:\Users\Michele\Desktop\my-repo\data\02_exe0_geometries.csv"
 with open (geomPath, "r") as file:
     lines = file.readlines()
 
