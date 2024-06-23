@@ -1,4 +1,4 @@
-folder = r"C:\Users\Michele\OneDrive - Scientific Network South Tyrol\EMMA\Year 1\Advanced geomatics\LUISA_MENESTRINA"
+folder = r"C:\Users\Michele\Desktop\my-repo\data"
 
 #Exercise 1
 age = 25
